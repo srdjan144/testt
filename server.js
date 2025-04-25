@@ -12,8 +12,8 @@ app.get("/api/properties", async (req, res) => {
     try {
         const response = await axios.get("https://api.apimo.pro/agencies/2188/properties", {
             headers: {
-                Authorization: process.env.APIMO_AUTH
-            }
+                Authorization: process.env.APIMO_AUTH,
+            },
         });
         res.json(response.data);
     } catch (error) {
