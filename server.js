@@ -1,21 +1,23 @@
 const express = require("express");
-const cors = require("cors");
 const axios = require("axios");
+const cors = require("cors");
 require("dotenv").config();
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const port = process.env.PORT || 3000;
 
 app.use(cors());
 
 app.get("/api/properties", async (req, res) => {
   try {
-    const response = await axios.get("https://api.apimo.pro/agencies/2188/properties", {
-      headers: {
-        Authorization: process.env.APIMO_TOKEN,
-      },
-    });
-
+    const response = await axios.get(
+      "https://api.apimo.pro/agencies/2188/properties",
+      {
+        headers: {
+          Authorization: `${process.env.APIMO_AUTH}`
+        }
+      }
+    );
     res.json(response.data);
   } catch (error) {
     console.error("Erreur API Apimo :", error.response ? error.response.data : error.message);
@@ -23,6 +25,6 @@ app.get("/api/properties", async (req, res) => {
   }
 });
 
-app.listen(PORT, () => {
-  console.log(`Serveur démarré sur le port ${PORT}`);
+app.listen(port, () => {
+  console.log(`Serveur lancé sur http://localhost:${port}`);
 });
